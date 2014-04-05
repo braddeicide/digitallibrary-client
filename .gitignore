@@ -1,0 +1,17 @@
+#java specific
+*.class
+
+# netbeans ignore project settings
+nbproject/
+
+# generic files
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+
+# Package files
+*.jar
+*.war
+*.ear
