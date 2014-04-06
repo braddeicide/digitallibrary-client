@@ -13,6 +13,8 @@ import java.util.prefs.Preferences;
  */
 public class configData {
     private Preferences prefs;
+    private String Server;
+    private String ServerType;
     private String LocalUploadDir;
     private String LocalDbUsername;
     private String LocalDbPassword;
@@ -21,10 +23,20 @@ public class configData {
     public configData() {
         prefs = Preferences.userRoot().node(this.getClass().getName());
         try {
+            Server          = prefs.get("Server", "localhost");
+            ServerType      = prefs.get("ServerType", "DbMySQL");
             LocalUploadDir  = prefs.get("LocalUploadDir","");
             LocalDbUsername = prefs.get("LocalDbUsername","");
             LocalDbPassword = prefs.get("LocalDbPassword","");
         } catch(java.lang.NullPointerException e) {/* first use */}
+    }
+    
+    String getServer(){
+        return Server;
+    }
+
+    String getServerType(){
+        return ServerType;
     }
     
     String getLocalUploadDir(){
@@ -39,6 +51,11 @@ public class configData {
         return LocalDbPassword;
     }
 
+    void SetServer(String in){
+        prefs.put("Server", in);
+        Server = in;
+    }
+    
     void SetLocalUploadDir(String in){
         prefs.put("LocalUploadDir", in);
         LocalUploadDir = in;
@@ -56,7 +73,7 @@ public class configData {
     }
 
     public String toString() {
-        return "cnt";
+        return "Todo, print all configuratoin details.";
     }
 
 }

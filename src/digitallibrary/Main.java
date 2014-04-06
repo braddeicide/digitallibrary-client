@@ -5,10 +5,6 @@
  */
 
 package digitallibrary;
-//import java.awt.*;
-//import java.awt.event.*;
-//import javax.swing.*;
-//import java.io.*;
 
 /**
  *
@@ -24,12 +20,13 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    try {
-//        Interface one = new Interface();
-        new Interface();
-    } catch(popupException e){}
-//        String test = one.go();
-        // TODO code application logic here
+        
+        configData config  = new configData();
+        new Db(config).getjooq();
+        
+        try {
+            new Interface();
+        } catch(popupException e){}
     }
     
 }

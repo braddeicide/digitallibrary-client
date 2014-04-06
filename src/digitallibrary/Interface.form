@@ -1639,9 +1639,6 @@
                     <Component class="javax.swing.JButton" name="jButton_upload_store">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Store"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[73, 25]"/>
-                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_upload_storeActionPerformed"/>
@@ -1692,7 +1689,6 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/digitallibrary/images/books2.gif"/>
                         </Property>
-                        <Property name="focusTraversalKeysEnabled" type="boolean" value="false"/>
                         <Property name="focusable" type="boolean" value="false"/>
                         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[213, 1]"/>

@@ -19,6 +19,13 @@ import java.util.ArrayList;
 import javax.swing.table.*;
 //import java.nio.file.Path;
 
+import digitallibrary.generated.Tables.*;
+import org.jooq.impl.DSL.*;
+import org.jooq.DSLContext;
+import org.jooq.SQLDialect;
+import org.jooq.*;
+import org.jooq.impl.DSL;
+
 /**
  *
  * @author  brad
@@ -789,47 +796,47 @@ public class Interface extends javax.swing.JFrame{
 
         classification.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "General", "Thesis" }));
         classification.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                classificationPopupMenuWillBecomeVisible(evt);
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                classificationPopupMenuWillBecomeVisible(evt);
             }
         });
         jPanel_view.add(classification, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 180, -1));
 
         group.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                groupPopupMenuWillBecomeVisible(evt);
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                groupPopupMenuWillBecomeVisible(evt);
             }
         });
         jPanel_view.add(group, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 180, -1));
 
         dateStarts.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "any", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007" }));
         dateStarts.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                dateStartsPopupMenuWillBecomeVisible(evt);
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                dateStartsPopupMenuWillBecomeVisible(evt);
             }
         });
         jPanel_view.add(dateStarts, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 180, -1));
 
         dateEnds.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "any", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007" }));
         dateEnds.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                dateEndsPopupMenuWillBecomeVisible(evt);
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                dateEndsPopupMenuWillBecomeVisible(evt);
             }
         });
         jPanel_view.add(dateEnds, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 180, -1));
@@ -924,7 +931,6 @@ public class Interface extends javax.swing.JFrame{
         jPanel_upload.add(jButton_upload_browse);
 
         jButton_upload_store.setText("Store");
-        jButton_upload_store.setPreferredSize(new java.awt.Dimension(73, 25));
         jButton_upload_store.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_upload_storeActionPerformed(evt);
@@ -949,7 +955,6 @@ public class Interface extends javax.swing.JFrame{
         jPanel_PadBottom4.setLayout(new java.awt.BorderLayout());
 
         jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/digitallibrary/images/books2.gif"))); // NOI18N
-        jLabel44.setFocusTraversalKeysEnabled(false);
         jLabel44.setFocusable(false);
         jLabel44.setMinimumSize(new java.awt.Dimension(213, 1));
         jPanel_PadBottom4.add(jLabel44, java.awt.BorderLayout.CENTER);
@@ -1330,9 +1335,12 @@ jPanel_Admin.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints
     }//GEN-LAST:event_jPanel7AncestorResized
 
     private void StatisticsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_StatisticsComponentShown
-
+        
+        DSLContext create = DSL.using(localSql.getCon(), SQLDialect.MYSQL);
+        create.selectCount().from("documents");
+        String[] retrieve = create.select().from("documents").fetch().toString().split("");
+ 
         String sqlQuery = "select count(documentid) as c from documents";
-        String[] retrieve = {"c"};
         String[] answers  = localSql.query(sqlQuery, retrieve);
         jLabel49.setText(answers[0]);
         
